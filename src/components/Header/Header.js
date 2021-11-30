@@ -16,6 +16,7 @@ const Header = ({
             <span>Welcome, {user}</span>
             <Link className="button" to="/my-furniture">My Furniture</Link>
             <Link className="button" to="/create">Add Furniture</Link>
+            <Link className="button" to="/about">About</Link>
             <Link className="button" to="/logout">Logout</Link>
         </div>
     );
@@ -27,8 +28,8 @@ const Header = ({
                     <Link to="/catalog">Catalog</Link>
 
                     {isAuthenticated
-                        ? userNavigation
-                        : guestNavigation
+                        ? guestNavigation
+                        : userNavigation
                     }
                 </section>
             </nav>
