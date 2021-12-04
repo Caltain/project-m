@@ -1,5 +1,5 @@
 import { useEffect,useState } from "react";
-import FurnitureCard from "./FurnitureCard.js";
+import FurnitureCard from "./FurnitureCard";
 import * as furnitureService from '../../services/furnitureService.js'
 
 const FurnitureList = () =>{
@@ -21,7 +21,7 @@ const FurnitureList = () =>{
                 {furniture.map(x=><FurnitureCard key={x._id} furniturePiece={x} />)}
             </ul>
         )
-        : <p>No furniture available at this very moment.Sorry for the inconvinionce!</p>
+        : <p>No furniture available at this very moment. Sorry for the inconvinionce!</p>
        }
     </>
     )

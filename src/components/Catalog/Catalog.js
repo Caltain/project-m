@@ -1,15 +1,19 @@
+import {Routes, Route} from 'react-router-dom'
 
+import FurnitureList from '../FurnitureList';
 
 
 const Catalog = () => {
     return (
-        <section id="Catalog-page" className="Catalog">
+        <section id="catalog-page" className="catalog">
        
 
             <section>
                 
                     <h1>Furniture</h1>
-              
+              <Routes>
+                 <Route path="/" element={<FurnitureList />} />
+              </Routes>
                 
             </section>
 
