@@ -61,28 +61,7 @@ li {
   color: red;
 }
 
-.img {
-  width: 15rem;
-  position: relative;
-  overflow: hidden;
-  padding: 0rem;
-}
 
-img {
-  display: block;
-  position: absolute;
-  left: 0;
-  right: 0;
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-}
-
-.img::after {
-  display: block;
-  content: "";
-  padding-top: 100%;
-}
 
 .detailsOtherPet,
 .detailsMyPet,
@@ -165,7 +144,7 @@ div.actions a {
 footer {
   margin-top: auto;
   text-align: center;
-  background: #234465;
+  background: #202325;
 }
 
 footer p {
@@ -191,4 +170,21 @@ textarea#description {
   margin-bottom: 15px;
   padding: 10px;
   box-shadow: -8px -2px 28px -8px #000000;
+}
+.homeView{
+  
+  width: auto;  
+  text-align: center;  
+  padding-top: 40px;
+  
+ 
+
+}
+
+.homeView img {
+  padding-top: 90px;
+  padding-bottom: 90px;
+  max-width:100%;
+  height:auto;  
+
 }

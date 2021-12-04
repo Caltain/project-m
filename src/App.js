@@ -8,6 +8,7 @@ import Header from './components/Header';
 import Login from './components/Login';
 import Register from './components/Register';
 import Logout from './components/Logout/Logout';
+import Home from './components/Home';
 
 
 
@@ -35,13 +36,14 @@ function App() {
 
     <div id="container">
          <Header/>
-     
+      
       <main className = "content">
           <Routes>
           <Route path ="/catalog/*" element={<Catalog/>} />
           <Route path ="/login" element={<Login/>} />
           <Route path ="/register" element={<Register/>} />
           <Route path="/logout" element={<Logout />} />
+          <Route path="/" element={<Home />} />
 
           </Routes>
 
