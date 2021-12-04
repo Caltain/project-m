@@ -111,6 +111,7 @@ img {
 }
 
 .catalog .navbar {
+  margin-left:0
   justify-content: center;
 }
 
