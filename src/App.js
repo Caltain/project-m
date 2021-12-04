@@ -6,6 +6,8 @@ import useLocalStorage from './hooks/useLocalStorage';
 import Catalog from './components/Catalog/Catalog';
 import Header from './components/Header';
 import Login from './components/Login';
+import Register from './components/Register';
+import Logout from './components/Logout/Logout';
 
 
 
@@ -20,7 +22,9 @@ function App() {
   const [user, setUser] = useLocalStorage('user', initialAuthState)
 
   const login = (authhData) => {
-    setUser(authhData)
+    setUser({id:authhData._id,
+    email:authhData.email,
+    accessToken:authhData.accessToken})
   }
 
   const logout = () => {
@@ -36,6 +40,9 @@ function App() {
           <Routes>
           <Route path ="/catalog/*" element={<Catalog/>} />
           <Route path ="/login" element={<Login/>} />
+          <Route path ="/register" element={<Register/>} />
+          <Route path="/logout" element={<Logout />} />
+
           </Routes>
 
       </main>

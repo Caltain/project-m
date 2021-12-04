@@ -36,7 +36,7 @@ const Header = () => {
 
         <Navbar bg="dark" variant="dark">
           <Container>
-          <Navbar.Brand to="/catalog" as={Link}>Catalog</Navbar.Brand>
+          <Navbar.Brand to="/" as={Link}>Project-Furniture</Navbar.Brand>
           <Nav className="ms-auto">
               {user.email
 
