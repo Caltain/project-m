@@ -15,7 +15,9 @@ class SimpleMap extends Component {
   render() {
     return (
       // Important! Always set the container height explicitly
-      <div style={{ height: '800px', width: '800px', marginRight: "auto",marginLeft: "auto" }}>
+      <section className='about-container'>
+
+      <div className='about-child-1' style={{ height: '600px', width: '600px'}}>
         <GoogleMapReact
           bootstrapURLKeys={{ key: "AIzaSyDIk_2C_M8zpUTnoXZT1LdPzU07vemrROY"}}
           defaultCenter={this.props.center}
@@ -29,6 +31,11 @@ class SimpleMap extends Component {
           />
         </GoogleMapReact>
       </div>
+      <div id="img-me">
+           <p><img id="imageofme" src="/images/me.jpg" /></p>
+           <span id="spanOfMe">This is me with my daughter!</span>
+      </div>
+      </section>
     );
   }
 }

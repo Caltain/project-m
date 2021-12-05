@@ -21,12 +21,12 @@ const Create = () => {
 
   <Form.Group className="mb-3" controlId="formGridYear">
     <Form.Label>Year</Form.Label>
-    <Form.Control placeholder="2021" name = "year" />
+    <Form.Control placeholder="What's the year if of production of your item?" name = "year" />
   </Form.Group>
 
   <Form.Group className="mb-3" controlId="formGridColor">
     <Form.Label>Color</Form.Label>
-    <Form.Control placeholder="Red, black, white.... " name="color" />
+    <Form.Control placeholder="What is the color of your item ? " name="color" />
   </Form.Group>
 
   <Form.Group className="mb-3" controlId="formGridImage">

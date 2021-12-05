@@ -211,3 +211,19 @@ textarea#description {
   margin-right: auto;
   margin-left: auto;
 }
+
+.about-container{
+  height: 600px;
+  display: flex;
+  align-content: center;
+  justify-content: space-evenly;
+}
+
+#imageofme{
+  height: 500px ;
+  width: auto;
+}
+#spanOfMe{
+  font-size:larger;
+  font-weight: 600;
+}
