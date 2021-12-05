@@ -33,6 +33,8 @@ const Login = () =>{
     }
 
     return (
+      <div className="login-form">
+
         <Form  onSubmit={onLoginHandler} method="POST">
     <Form.Group className="mb-3" controlId="formBasicEmail">
       <Form.Label>Email address</Form.Label>
@@ -46,10 +48,11 @@ const Login = () =>{
       <Form.Label>Password</Form.Label>
       <Form.Control type="password" name="password" placeholder="Password" />
     </Form.Group>
-    <Button variant="primary" type="submit">
+    <Button variant="secondary" type="submit">
       Login
     </Button>
   </Form>
+      </div>
 
 
 )

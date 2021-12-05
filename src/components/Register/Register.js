@@ -22,6 +22,7 @@ const Register = () =>{
             });
         }
   return(
+    <div className="register-form">
     <Form  onSubmit={registerSubmitHandler} method="POST">
     <Form.Group className="mb-3" controlId="formBasicEmail">
       <Form.Label>Email address</Form.Label>
@@ -39,10 +40,12 @@ const Register = () =>{
       <Form.Label>Repeat password</Form.Label>
       <Form.Control type="password" name="repeatPassword" placeholder="Repeat password" />
     </Form.Group>
-    <Button variant="primary" type="submit">
+    <Button variant="secondary" type="submit">
       Register
     </Button>
   </Form>
+
+    </div>
   )
 }
 export default Register;

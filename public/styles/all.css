@@ -188,3 +188,26 @@ textarea#description {
   height:auto;  
 
 }
+
+.login-form {
+  padding: 70px ;
+  justify-content: center;
+  display: table;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.register-form {
+  padding: 70px ;
+  justify-content: center;
+  display: table;
+  margin-right: auto;
+  margin-left: auto;
+}
+.create-page {
+  padding: 30px ;
+  justify-content: center;
+  display: table;
+  margin-right: auto;
+  margin-left: auto;
+}
