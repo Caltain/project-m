@@ -8,7 +8,7 @@ import { useAuthContext } from '../../contexts/AuthContext';
 
 
 const Create = () => {
-  let allValidFields = true;
+
   const navigate = useNavigate();
   const { user } = useAuthContext();
   const [errors, setErrors] = useState({
@@ -31,7 +31,15 @@ const Create = () => {
     let color = formData.get('color');
     let imageUrl = formData.get('imageUrl');
     let description = formData.get('description');
-    if(allValidFields){
+
+    if(
+        errors.name== false 
+      &&errors.price== false
+      &&errors.year== false
+      &&errors.color== false
+      &&errors.imageUrl== false
+      &&errors.description== false 
+      ){
       furnitureService.create({
           name,
           price,
@@ -44,68 +52,52 @@ const Create = () => {
               navigate('/catalog');
           })
 
+    }else{
+      return
     }
 }
 
 const changeHandler = (e) => {
   let currentValue = e.target.value;
- 
   let field = e.target.name
-  console.log(field);
   if(field==="name"){
     if (currentValue.length < 3 || currentValue.length >20  ) {
       setErrors(state => ({...state, name: 'This field should have between 3 and 20 characters!'}))
-      allValidFields = false
-      
     } else {
-        setErrors(state => ({...state, name: false}))
-        allValidFields = true;
+        setErrors(state => ({...state, name: false}))     
     }
   }else if(field==="price"){
     if (!Number(currentValue)) {
-      setErrors(state => ({...state, price: 'This field should contain only numbers'}))
-      allValidFields = false
-      
+      setErrors(state => ({...state, price: 'This field should contain only numbers'}))           
     } else {
         setErrors(state => ({...state, price: false}))
-        allValidFields = true;
     }
   }else if(field==="year"){
     if (!Number(currentValue)) {
       setErrors(state => ({...state, year: 'This field should contain only numbers'}))
-      allValidFields = false
-      
     } else {
         setErrors(state => ({...state, year: false}))
-        allValidFields = true;
     }
   }else if(field==="color"){
     if (currentValue.length < 3 || currentValue.length >20) {
       setErrors(state => ({...state, color: 'This field should have between 3 and 20 characters!'}))
-      allValidFields = false
       
     } else {
         setErrors(state => ({...state, color: false}))
-        allValidFields = true;
     }
   }else if(field==="imageUrl"){
     const valid = /^(ftp|http|https):\/\/[^ "]+$/.test(currentValue);
     if (!valid) {
-      setErrors(state => ({...state, imageUrl: 'This field should be a valid URL'}))
-      allValidFields = false
-      
+      setErrors(state => ({...state, imageUrl: 'This field should be a valid URL'}))   
     } else {
         setErrors(state => ({...state, imageUrl: false}))
-        allValidFields = true;
     }
   }else if(field==="description"){
     if (currentValue.length < 3 || currentValue.length >20) {
       setErrors(state => ({...state, description: 'This field should have between 3 and 20 characters!'}))
-      allValidFields = false
       
     } else {
         setErrors(state => ({...state, description: false}))
-        allValidFields = true;
     }
 }
 }
