@@ -20,7 +20,7 @@ You will also see any lint errors in the console.
 
 
 ## Server
-I'am using softuni practice server. It is in the repository. To start it you need to go to it's directory and type node server.js to start it.
+I'am using softuni practice server. It is in the repository. To start it you need to go to it's directory and type `node server.js` to start it.
 It is designed by Viktor if i am not missled. It is simple rest service that does the job. You can make CRUD operations and its relatively stable.
 
 
