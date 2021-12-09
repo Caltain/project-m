@@ -12,13 +12,13 @@ export const getAll = async () =>{
 }
 
 export const create = async (furnitureData, token) =>{
-    let response = await fetch(`${baseUrl}/pets`,{
+    let response = await fetch(`${baseUrl}/furniture`,{
         method:'POST',
         headers:{
             'content-type':'application/json',
             'X-Authorization': token,
         },
-        body: JSON.stringify({...furnitureData, likes:[]})
+        body: JSON.stringify({...furnitureData, buyStatus:'free'})
     });
         let result = await response.json()
     return result

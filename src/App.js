@@ -1,8 +1,9 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Routes, Route } from 'react-router';
 
-import { AuthContext } from './contexts/AuthContext';
-import useLocalStorage from './hooks/useLocalStorage';
+import { AuthProvider } from './contexts/AuthContext';
+import ErrorBoundary from './components/Common/ErrorBoundary';
+
 import Catalog from './components/Catalog/Catalog';
 import Header from './components/Header';
 import Login from './components/Login';
@@ -22,19 +23,9 @@ const initialAuthState = {
 }
 
 function App() {
-  const [user, setUser] = useLocalStorage('user', initialAuthState)
-
-  const login = (authhData) => {
-    setUser({id:authhData._id,
-    email:authhData.email,
-    accessToken:authhData.accessToken})
-  }
-
-  const logout = () => {
-    setUser(initialAuthState)
-  }
   return (
-    <AuthContext.Provider value={{user,login,logout}} >
+    <ErrorBoundary>
+    <AuthProvider>
 
     <div id="container">
          <Header/>
@@ -53,10 +44,11 @@ function App() {
 
       </main>
       <footer id="footer">
-          <p>The best place to find the furniture you are looking for! </p>
+          <p>The best place to sell and find the furniture you are looking for! </p>
       </footer>
     </div>
-    </AuthContext.Provider>
+    </AuthProvider>
+    </ErrorBoundary>
     
   )
 }
