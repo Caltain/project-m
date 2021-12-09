@@ -1,5 +1,4 @@
-import { Form, Button, Row } from "react-bootstrap";
-import { Alert } from 'react-bootstrap';
+import { Form, Button, Row, Alert } from "react-bootstrap";
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
@@ -32,15 +31,16 @@ const Create = () => {
     let imageUrl = formData.get('imageUrl');
     let description = formData.get('description');
 
-    if(
-        errors.name== false 
-      &&errors.price== false
-      &&errors.year== false
-      &&errors.color== false
-      &&errors.imageUrl== false
-      &&errors.description== false 
-      ){
-      furnitureService.create({
+    try {
+        if(
+            errors.name== false 
+          &&errors.price== false
+          &&errors.year== false
+          &&errors.color== false
+          &&errors.imageUrl== false
+          &&errors.description== false 
+          ){
+          furnitureService.create({
           name,
           price,
           year,
@@ -55,6 +55,10 @@ const Create = () => {
     }else{
       return
     }
+      } catch (error) {
+        console.log(error)
+      }
+    
 }
 
 const changeHandler = (e) => {
