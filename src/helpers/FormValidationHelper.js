@@ -1,5 +1,3 @@
-
-
 export const validateEmail = (email) =>{
     const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
     return valid
@@ -34,6 +32,6 @@ export const validateNumber = (number) =>{
 }
 
 export const validateImageUrl = (imageUrl) =>{
-const valid = /^(ftp|http|https):\/\/[^ "]+$/.test(imageUrl);
+const valid = /^(ftp|http|https|data):\/\/[^ "]+$/.test(imageUrl);
     return valid
 }

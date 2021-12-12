@@ -1,6 +1,8 @@
 import { useEffect,useState } from "react";
 import FurnitureCard from "./FurnitureCard";
 import * as furnitureService from '../../services/furnitureService.js'
+import { CardGroup} from "react-bootstrap";
+
 
 const FurnitureList = () =>{
     const [furniture, setFurniture] = useState([]);
@@ -12,18 +14,25 @@ const FurnitureList = () =>{
             })
 
     },[])
+        console.log(furniture);
+    return (
+            <>
+            
+            {furniture?.length > 0 
+            ? (
+                <ul className="ulFurniture">
+                    <CardGroup>
 
-    return(
-     <>
-        {furniture.length> 0
-        ?(
-            <ul>
-                {furniture.map(x=><FurnitureCard key={x._id} furniturePiece={x} />)}
-            </ul>
-        )
-        : <p>No furniture available at this very moment. Sorry for the inconvinionce!</p>
-       }
-    </>
+                    {furniture.map(x=><FurnitureCard key={x._id} furniturePiece={x} />)}
+                    </CardGroup>
+                </ul>
+            )
+            : <p>No furniture available at this very moment. Sorry for the inconvinionce!</p>
+           }
+                
+        
+            </>
+  
     )
 
 }

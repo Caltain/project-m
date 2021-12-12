@@ -2,13 +2,21 @@ const baseUrl = 'http://localhost:3030/data'
 
 
 export const getAll = async () =>{
-    let response = await fetch(`${baseUrl}/furniture`)
+    try {
+        
+        let response = await fetch(`${baseUrl}/furniture`)
+        if(response.status == 200){
+            let furniture = await response.json()
+        
+            let result = Object.values(furniture)   
+        
+            return result 
 
-    let furniture = await response.json()
-
-    let result = Object.values(furniture)   
-
-    return result 
+        }
+    } catch (error) {
+        console.log(error);
+        return []
+    }
 }
 
 export const create = async (furnitureData, token) =>{
