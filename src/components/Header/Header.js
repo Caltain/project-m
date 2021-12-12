@@ -25,7 +25,7 @@ const Header = () => {
             <Nav.Link>Wellcome {user.email}!</Nav.Link>
             <Nav.Link to="/catalog" as={Link}>Catalog</Nav.Link>
             <Nav.Link to="/create" as={Link}>Create</Nav.Link>
-            <Nav.Link to="/myfurniture" as={Link}>My Furniture</Nav.Link>
+            <Nav.Link to="/my-reservations" as={Link}> My Reservations</Nav.Link>
             <Nav.Link to="/about" as={Link}>About</Nav.Link>
             <Nav.Link to="/logout" as={Link}>Logout</Nav.Link>
         </>

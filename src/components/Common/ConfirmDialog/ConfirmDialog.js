@@ -6,18 +6,17 @@ const ConfirmDialog = ({
     onSave,
 }) => {
     return (
-        <Modal show={show} onHide={onClose}>
-            <Modal.Header closeButton>
-                <Modal.Title>Modal title</Modal.Title>
-            </Modal.Header>
-
+        <Modal size="sm" aria-labelledby="contained-modal-title-vcenter"
+        centered show={show} onHide={onClose}>
+           
             <Modal.Body>
-                <p>Modal body text goes here.</p>
-            </Modal.Body>
+              <p>Are you sure you want to delete this item ?</p>
+             </Modal.Body>
+    
 
             <Modal.Footer>
-                <Button variant="secondary" onClick={onClose}>Close</Button>
-                <Button variant="primary" onClick={onSave}>Save changes</Button>
+                <Button variant="secondary" onClick={onClose}>No</Button>
+                <Button variant="primary" onClick={onSave}>Yes</Button>
             </Modal.Footer>
         </Modal>
     );

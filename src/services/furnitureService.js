@@ -4,11 +4,17 @@ const baseUrl = 'http://localhost:3030/data';
 
 export const getAll = () => request.get(`${baseUrl}/furniture`);
 
-export const getMyListings = (ownerId) => {
-    let query = encodeURIComponent(`_ownerId="${ownerId}"`);
 
-    return request.get(`${baseUrl}/furniture?where=${query}`);
+
+export const getReservations = (reserverId) => {
+    let query = encodeURIComponent(`userId="${reserverId}"`);
+    
+  
+    return   request.get(`${baseUrl}/reserve?where=${query}`)
+
 };
+
+
 
 export const create = async (furnitureData, token) => {
     let response = await fetch(`${baseUrl}/furniture`, {
@@ -17,7 +23,7 @@ export const create = async (furnitureData, token) => {
             'content-type': 'application/json',
             'X-Authorization': token,
         },
-        body: JSON.stringify({...furnitureData, likes: []})
+        body: JSON.stringify({...furnitureData, likes: [], love:[], reserved:"none"})
     });
 
     let result = await response.json();
@@ -27,13 +33,15 @@ export const create = async (furnitureData, token) => {
 
 export const update = (furnitureId, furnitureData) => request.put(`${baseUrl}/furniture/${furnitureId}`, furnitureData);
 
-export const getOne = async (furnitureId) => {
-    let response = await fetch(`${baseUrl}/furniture/${furnitureId}`)
-       
-    let result = await response.json();
-    return result;
-
+export const getOne = (furnitureId, signal) => {
+    console.log(furnitureId);
+    return fetch(`${baseUrl}/furniture/${furnitureId}`, {signal})
+        .then(res =>
+            {
+              console.log(res);  
+                 res.json()})
 };
+
 
 export const destroy = (furnitureId, token) => {
     return fetch(`${baseUrl}/furniture/${furnitureId}`, {

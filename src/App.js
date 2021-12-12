@@ -17,6 +17,7 @@ import Notification from './components/Common/Notification';
 import GuardedRoute from './components/Common/GuardedRoute';
 import Details from './components/Details/Details';
 import Edit from './components/Edit/Edit';
+import Reservations from './components/Reservations/Reservations';
 
 
 function App() {
@@ -40,6 +41,7 @@ function App() {
           <Route path="/details/:furnitureId" element={<Details />} />
           <Route path="/" element={<Home />} />
           <Route element={<GuardedRoute />}>
+                  <Route path="/my-reservations" element={<Reservations />} />
                   <Route path ="/about" element={<About/>} />
                   <Route path="/create" element={<Create />} />
                   <Route path="/edit/:furtnitureId" element={<Edit />} />
