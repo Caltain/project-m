@@ -8,8 +8,6 @@ export const getAll = () => request.get(`${baseUrl}/furniture`);
 
 export const getReservations = (reserverId) => {
     let query = encodeURIComponent(`userId="${reserverId}"`);
-    
-  
     return   request.get(`${baseUrl}/reserve?where=${query}`)
 
 };
@@ -23,7 +21,7 @@ export const create = async (furnitureData, token) => {
             'content-type': 'application/json',
             'X-Authorization': token,
         },
-        body: JSON.stringify({...furnitureData, likes: [], love:[], reserved:"none"})
+        body: JSON.stringify({...furnitureData, likes: [], love:[], reserved:[]})
     });
 
     let result = await response.json();
@@ -33,13 +31,11 @@ export const create = async (furnitureData, token) => {
 
 export const update = (furnitureId, furnitureData) => request.put(`${baseUrl}/furniture/${furnitureId}`, furnitureData);
 
-export const getOne = (furnitureId, signal) => {
+export const getOne = (furnitureId) => {
     console.log(furnitureId);
-    return fetch(`${baseUrl}/furniture/${furnitureId}`, {signal})
+    return fetch(`${baseUrl}/furniture/${furnitureId}`)
         .then(res =>
-            {
-              console.log(res);  
-                 res.json()})
+                 res.json())
 };
 
 

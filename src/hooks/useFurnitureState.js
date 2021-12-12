@@ -4,21 +4,15 @@ import * as furnitureService from '../services/furnitureService';
 
 const useFurnitureState = (furnitureId) => {
     const [furniture, setFurniture] = useState({});
-    const controller = useMemo(() => {
-        const controller = new AbortController();
 
-        return controller;
-    }, [])
     useEffect(() => {
-        furnitureService.getOne(furnitureId, controller.signal)
+        furnitureService.getOne(furnitureId)
             .then(furnitureResult => {
-                
+                console.log(furnitureResult);
                 setFurniture(furnitureResult);
             })
-            return () => {
-                controller.abort();     
-            }
-    }, [furnitureId, controller])
+            
+    },[furnitureId])
 
     return [
         furniture,

@@ -94,24 +94,26 @@ const Details = () => {
             
 
             setFurniture(state => ({...state, love: [...state.love, user._id]}));
-            console.log(furniture);
+            
 
                 addNotification('Successfuly loved a furniture :)', types.success);
             });
     };
     const reserveButtonClick = () => {
-       
-        console.log(furniture)
+        if (user._id === furniture._ownerId) {
+            return;
+        }
+        
         if (furniture.reserve?.length>1) {
             addNotification('This item has already been reserved!')
             return;
-        }
+        } 
         
         likeService.reserve(user._id, furnitureId)
         .then(() => {
             
 
-            setFurniture(state => ({...state, reserved: user._id}));
+            setFurniture(state => ({...state, reserve: [...state.reserve, user._id]}));
         
            
 
