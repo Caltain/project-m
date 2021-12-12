@@ -14,7 +14,7 @@ const FurnitureList = () =>{
             })
 
     },[])
-        console.log(furniture);
+       
     return (
             <>
             

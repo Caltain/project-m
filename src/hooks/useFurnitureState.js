@@ -8,6 +8,7 @@ const useFurnitureState = (furnitureId) => {
     useEffect(() => {
         furnitureService.getOne(furnitureId)
             .then(furnitureResult => {
+                console.log(furnitureResult);
                 setFurniture(furnitureResult);
             })
     }, [furnitureId]);

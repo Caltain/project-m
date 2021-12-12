@@ -1,48 +1,56 @@
-const baseUrl = 'http://localhost:3030/data'
+import * as request from './requester';
 
+const baseUrl = 'http://localhost:3030/data';
 
-export const getAll = async () =>{
-    try {
-        
-        let response = await fetch(`${baseUrl}/furniture`)
-        if(response.status == 200){
-            let furniture = await response.json()
-        
-            let result = Object.values(furniture)   
-        
-            return result 
+export const getAll = () => request.get(`${baseUrl}/furniture`);
 
-        }
-    } catch (error) {
-        console.log(error);
-        return []
-    }
-}
+export const getMyListings = (ownerId) => {
+    let query = encodeURIComponent(`_ownerId="${ownerId}"`);
 
-export const create = async (furnitureData, token) =>{
-    let response = await fetch(`${baseUrl}/furniture`,{
-        method:'POST',
-        headers:{
-            'content-type':'application/json',
+    return request.get(`${baseUrl}/furniture?where=${query}`);
+};
+
+export const create = async (furnitureData, token) => {
+    let response = await fetch(`${baseUrl}/furniture`, {
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json',
             'X-Authorization': token,
         },
-        body: JSON.stringify({...furnitureData, buyStatus:'free'})
+        body: JSON.stringify({...furnitureData, likes: []})
     });
-        let result = await response.json()
-    return result
-}
 
-export const getOne = (furnitureId) =>{
-    return fetch(`${baseUrl}/furniture/${furnitureId}`)
-    .then(res => res.json())
-}
+    let result = await response.json();
 
+    return result;
+};
 
-export const destroy = (furnitureId, token) =>{
-    return fetch(`${baseUrl}/furniture/${furnitureId}`,{
-        method:'DELETE',
-        headers:{
+export const update = (furnitureId, furnitureData) => request.put(`${baseUrl}/furniture/${furnitureId}`, furnitureData);
+
+export const getOne = async (furnitureId) => {
+    let response = await fetch(`${baseUrl}/furniture/${furnitureId}`)
+       
+    let result = await response.json();
+    return result;
+
+};
+
+export const destroy = (furnitureId, token) => {
+    return fetch(`${baseUrl}/furniture/${furnitureId}`, {
+        method: 'DELETE',
+        headers: {
             'X-Authorization': token
         }
-    }).then(res=>res.json())
-}
+    }).then(res => res.json());
+};
+
+export const like = (furnitureId, furniture, token) => {
+    return fetch(`${baseUrl}/furniture/${furnitureId}`, {
+        method: 'PUT',
+        headers: {
+            'content-type': 'application/json',
+            'X-Authorization': token
+        },
+        body: JSON.stringify(furniture)
+    }).then(res => res.json());
+};

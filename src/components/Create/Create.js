@@ -120,7 +120,7 @@ const changeHandler = (e) => {
     </Form.Group>
   <Form.Group className="mb-3" controlId="formGridPrice">
     <Form.Label>Price</Form.Label>
-    <Form.Control placeholder="Enter the price in leva of your item? " name="price" onChange={changeHandler} required />
+    <Form.Control placeholder="Enter the price in euros of your item? " name="price" onChange={changeHandler} required />
     <Alert variant="danger" show={errors.price}>{errors.price}</Alert>
 
   </Form.Group>
