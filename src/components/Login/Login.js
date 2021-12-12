@@ -3,7 +3,7 @@ import { Form, Button, Alert, Row } from "react-bootstrap";
 import { useNavigate } from "react-router";
 import { AuthContext } from "../../contexts/AuthContext";
 import * as authService from "../../services/authService"
-
+import { validateEmail,validatePassword } from "../../helpers/FormValidationHelper";
 const Login = () =>{
 
     const {login} = useContext(AuthContext)
@@ -49,20 +49,18 @@ const Login = () =>{
       let currentValue = e.target.value;
       let field = e.target.name
       if(field==="email"){
-    const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(currentValue);
-
-        if (!valid) {
-          setErrors(state => ({...state, email: 'This field should be a valid email'}))
+        if (validateEmail(currentValue)) {
+          setErrors(state => ({...state, email: false}))
+          setErrors(state => ({...state, serverErr: false}))     
         } else {
-            setErrors(state => ({...state, email: false}))
-            setErrors(state => ({...state, serverErr: false}))     
+          setErrors(state => ({...state, email: 'This field should be a valid email'}))
         }
       }else if(field==="password"){
-        if (currentValue.length < 3 || currentValue.length >20) {
-          setErrors(state => ({...state, password: 'The password should be between 3 and 20 characters'}))           
+        if (validatePassword(currentValue)) {
+          setErrors(state => ({...state, password: false}))
+          setErrors(state => ({...state, serverErr: false}))
         } else {
-            setErrors(state => ({...state, password: false}))
-            setErrors(state => ({...state, serverErr: false}))
+          setErrors(state => ({...state, password: 'The password should be between 3 and 20 characters'}))           
         }
       }
     }
