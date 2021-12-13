@@ -21,13 +21,14 @@ const FurnitureList = () =>{
             {furniture?.length > 0 
             ? (
                 <ul className="ulFurniture">
+                    <h1>Furniture listings</h1>
                     <CardGroup>
 
                     {furniture.map(x=><FurnitureCard key={x._id} furniturePiece={x} />)}
                     </CardGroup>
                 </ul>
             )
-            : <p>No furniture available at this very moment. Sorry for the inconvinionce!</p>
+            : <p style={{textAlign:'center',marginTop:"300px",fontSize:"30px" }}>No furniture listings available at this very moment!</p>
            }
                 
         

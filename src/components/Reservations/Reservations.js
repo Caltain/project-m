@@ -37,7 +37,7 @@ const Reservations = () => {
                     </CardGroup>
                 </ul>
             )
-            : <p>No furniture available at this very moment. Sorry for the inconvinionce!</p>
+            : <p style={{textAlign:'center',marginTop:"300px",fontSize:"30px" }}>You currently have no reservations!</p>
            }
      </>
     );

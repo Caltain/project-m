@@ -10,7 +10,7 @@ const Catalog = () => {
 
             <section>
                 
-                    <h1>Furniture</h1>
+                  
               <Routes>
                  <Route path="/" element={<FurnitureList />} />
               </Routes>
