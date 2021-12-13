@@ -10,7 +10,7 @@ const ConfirmDialog = ({
         centered show={show} onHide={onClose}>
            
             <Modal.Body>
-              <p>Are you sure you want to delete this item ?</p>
+              <p>Are you sure you want to take this action ?</p>
              </Modal.Body>
     
 

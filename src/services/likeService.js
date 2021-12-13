@@ -22,7 +22,7 @@ export const getFurnitureLove = (furnitureId) => {
         .then(res => res.map(x => x.userId));
 };
 
-export const reserve = (userId, furnitureId) => request.post(`${baseUrl}/reserve`, {userId, furnitureId});
+export const reserve = (userId, furnitureId) => request.post(`${baseUrl}/reserve`, {userId, furnitureId,display:"show"});
 
 
 export const getFurnitureReserve = (furnitureId) => {

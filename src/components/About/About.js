@@ -1,10 +1,24 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
-import { Carousel } from "react-bootstrap";
+import { Carousel, Form, Button } from "react-bootstrap";
+import * as furnitureService from '../../services/furnitureService';
+
+
 
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
-const yesIWantToUseGoogleMapApiInternals = true;
+const user = JSON.parse(localStorage.getItem("user"))
+
+
+
 class SimpleMap extends Component {
+  
+  constructor(props) {
+    super(props);
+    this.onCreateComment=this.onCreateComment.bind(this)
+    this.state = {
+      hasBeenClicked: false,
+    };
+  }
   static defaultProps = {
     center: {
       lat: 42.654015,
@@ -12,13 +26,39 @@ class SimpleMap extends Component {
     },
     zoom: 16
   };
+  onCreateComment(e){
+e.preventDefault();
+
+
+let formData = new FormData(e.currentTarget);
+let form = document.getElementById('form')
+let email = formData.get('email');
+let comment = formData.get('comment')
+
+ try {
+   console.log(user.accessToken);
+   furnitureService.comment({email,comment},user.accessToken)
+   .then(res=>{
+
+    form.reset()
+    
+   })
+ 
+
+} catch (error) {
+  console.log(error);
+}
+
+  }
+
+
   
   render() {
+    
     return (
-      
       <section className='about-container'style={{marginTop:"100px"}}>
 
-      <div className='about-child-1' style={{ height: '600px', width: '600px'}}>
+      <div className='about-child-1' style={{ height: '400px', width: '400px', position:"bottom"}}>
         <GoogleMapReact
           bootstrapURLKeys={{ key: "AIzaSyDIk_2C_M8zpUTnoXZT1LdPzU07vemrROY"}}
           defaultCenter={this.props.center}
@@ -79,6 +119,23 @@ class SimpleMap extends Component {
   </Carousel.Item>
 </Carousel>
           
+      </div>
+      <div>
+      <Form id="form" onSubmit={this.onCreateComment} method="POST">  
+  <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+  <Form.Label>You can give feedback to the admin of this site if you like.</Form.Label>
+
+    <Form.Label>Your email address</Form.Label>
+    <Form.Control type="email" name='email' placeholder="name@example.com" />
+  </Form.Group>
+  <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+    <Form.Label>Comment</Form.Label>
+    <Form.Control as="textarea" name='comment' placeholder="Enter your comment here" rows={3} />
+  </Form.Group>
+  <Button variant="secondary" type="submit" >
+    Submit
+  </Button >
+</Form>
       </div>
       </section>
     );

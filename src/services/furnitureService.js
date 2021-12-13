@@ -21,13 +21,29 @@ export const create = async (furnitureData, token) => {
             'content-type': 'application/json',
             'X-Authorization': token,
         },
-        body: JSON.stringify({...furnitureData, likes: [], love:[], reserved:[]})
+        body: JSON.stringify({...furnitureData, likes: [], love:[], reserve:[]})
     });
 
     let result = await response.json();
 
     return result;
 };
+
+export const comment = async (commentData, token) => {
+    let response = await fetch(`${baseUrl}/comments`, {
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json',
+            'X-Authorization': token,
+        },
+        body: JSON.stringify({...commentData})
+    });
+
+    let result = await response.json();
+
+    return result;
+};
+
 
 export const update = (furnitureId, furnitureData) => request.put(`${baseUrl}/furniture/${furnitureId}`, furnitureData);
 
@@ -47,6 +63,15 @@ export const destroy = (furnitureId, token) => {
         }
     }).then(res => res.json());
 };
+export const cancel = (furnitureId, token) => {
+    return fetch(`${baseUrl}/reserve/${furnitureId}`, {
+        method: 'DELETE',
+        headers: {
+            'X-Authorization': token
+        }
+    }).then(res => res.json());
+};
+
 
 export const like = (furnitureId, furniture, token) => {
     return fetch(`${baseUrl}/furniture/${furnitureId}`, {

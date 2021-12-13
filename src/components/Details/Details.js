@@ -7,7 +7,7 @@ import { useAuthContext } from '../../contexts/AuthContext';
 import { useNotificationContext, types } from '../../contexts/NotificationContext';
 import useFurnitureState from '../../hooks/useFurnitureState';
 
-import { Button,ListGroup,Card } from 'react-bootstrap';
+import { Button,Card } from 'react-bootstrap';
 import ConfirmDialog from '../Common/ConfirmDialog';
 
 const Details = () => {
@@ -66,7 +66,7 @@ const Details = () => {
         if (user._id === furniture._ownerId) {
             return;
         }
-        console.log(furniture);
+       
         if (furniture.likes.includes(user._id)) {
             addNotification('You cannot like again')
             return;
@@ -124,8 +124,10 @@ const Details = () => {
     const userButtons = (
         <>
          <Button onClick={likeButtonClick} disabled={furniture.likes?.includes(user._id)}>Like</Button>
-         <Button style={{marginLeft:'5px'}} variant='danger' onClick={loveButtonClick} disabled={furniture.love?.includes(user._id)}>Love</Button>
+         <span style={{}}> <Button variant="info">Likes 👍: {furniture.likes?.length || 0}</Button>{" "}</span>
          <span > <Button onClick={reserveButtonClick} variant="success" disabled={furniture.reserve?.includes(user._id)}>Reserve</Button></span>
+         <Button style={{marginLeft:'5px'}} variant='danger' onClick={loveButtonClick} disabled={furniture.love?.includes(user._id)}>Love</Button>
+         <span style={{}}> <Button variant="danger">Loved ♥: {furniture.love?.length || 0}</Button>{" "}</span>
         </>
     );
     
@@ -161,8 +163,8 @@ const Details = () => {
              
 
 
-             <span style={{}}> <Button variant="info">Likes 👍: {furniture.likes?.length || 0}</Button>{" "}</span>
-             <span style={{}}> <Button variant="danger">Loved ♥: {furniture.love?.length || 0}</Button>{" "}</span>
+             
+             
              </Card.Body>
             
              </Card>

@@ -25,7 +25,7 @@ const Reservations = () => {
     }, [user._id]);
  
 
-  
+  console.log(furniture);
 
     return (
         <>
@@ -33,7 +33,7 @@ const Reservations = () => {
             ? (
                 <ul className="ulFurniture">
                     <CardGroup>
-                    {furniture.map(x=><FurnitureReservationCard key={x._id} furniturePiece={x} />)}
+                    {furniture.map(x=><FurnitureReservationCard key={x._id} furniturePiece={x} id={x._id} />)}
                     </CardGroup>
                 </ul>
             )
