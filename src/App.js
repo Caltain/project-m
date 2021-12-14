@@ -39,10 +39,10 @@ function App() {
          
           <Route path ="/login" element={<Login/>} />
           <Route path ="/register" element={<Register/>} />
-          <Route path="/logout" element={<Logout />} />
           <Route path="/details/:furnitureId" element={<Details />} />
           <Route path="/" element={<Home />} />
           <Route element={<GuardedRoute />}>
+                 <Route path="/logout" element={<Logout />} />
                   <Route path="/my-reservations" element={<Reservations />} />
                   <Route path ="/about" element={<About/>} />
                   <Route path="/create" element={<Create />} />
