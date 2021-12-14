@@ -34,7 +34,7 @@ export const create = async (furnitureData, token) => {
 export const update = (furnitureId, furnitureData) => request.put(`${baseUrl}/furniture/${furnitureId}`, furnitureData);
 
 export const getOne = (furnitureId) => {
-    console.log(furnitureId);
+   
     return fetch(`${baseUrl}/furniture/${furnitureId}`)
         .then(res =>
                  res.json())

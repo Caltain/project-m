@@ -4,9 +4,11 @@ import { useNavigate } from "react-router";
 import { AuthContext } from "../../contexts/AuthContext";
 import * as authService from "../../services/authService"
 import { validateEmail,validatePassword,validateRepeatedPassword } from "../../helpers/FormValidationHelper";
+import { useNotificationContext,types } from "../../contexts/NotificationContext";
 
 
 const Register = () =>{
+    const { addNotification } = useNotificationContext();
     const navigate = useNavigate();
     const {login} = useContext(AuthContext)
     const [errors, setErrors] = useState({
@@ -36,6 +38,7 @@ const Register = () =>{
           authService.register(email, password)   
             .then(authData => {
                 login(authData);
+                addNotification('Successfull registration!', types.success)
                 
                 navigate('/');
             })

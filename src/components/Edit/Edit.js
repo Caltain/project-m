@@ -4,28 +4,30 @@ import * as furnitureService from '../../services/furnitureService';
 import useFurnitureState from '../../hooks/useFurnitureState';
 import { Alert, Form, Row,Button } from 'react-bootstrap';
 import { validateString,validateNumber,validateImageUrl } from "../../helpers/FormValidationHelper";
+import { useNotificationContext,types } from '../../contexts/NotificationContext';
 
 
 const Edit = () => {
     const { furtnitureId } = useParams();
      const navigate = useNavigate();
+     const { addNotification } = useNotificationContext();
 
     const [errors, setErrors] = useState({ name: false, 
         price : false, 
-        year : false, 
+        phoneNumber : false, 
         color : false, 
         imageUrl:false, 
         description:false})
-    const [furniture, setFurniture] = useFurnitureState(furtnitureId);
+    const [furniture] = useFurnitureState(furtnitureId);
 
-    console.log(furtnitureId);
+    
     const furnitureEditSubmitHandler = (e) => {
         e.preventDefault();
         try {
             if(
                 errors.name== false 
               &&errors.price== false
-              &&errors.year== false
+              &&errors.phoneNumber== false
               &&errors.color== false
               &&errors.imageUrl== false
               &&errors.description== false 
@@ -36,6 +38,7 @@ const Edit = () => {
 
              furnitureService.update(furniture._id, furnitureData)
              .then(result => {
+                  addNotification('Successfuly edited your furniture listing!', types.success)
                   navigate(`/details/${furtnitureId}`);
               })
     
@@ -64,11 +67,11 @@ const Edit = () => {
           } else {
             setErrors(state => ({...state, price: 'This field should contain only numbers'}))           
           }
-        }else if(field==="year"){
+        }else if(field==="phoneNumber"){
           if (validateNumber(currentValue)) {
-            setErrors(state => ({...state, year: false}))
+            setErrors(state => ({...state, phoneNumber: false}))
           } else {
-            setErrors(state => ({...state, year: 'This field should contain only numbers'}))
+            setErrors(state => ({...state, phoneNumber: 'This field should contain only numbers'}))
           }
         }else if(field==="color"){
           if (validateString(currentValue)) {
@@ -109,10 +112,10 @@ const Edit = () => {
  <Alert variant="danger" show={errors.price}>{errors.price}</Alert>
 
 </Form.Group>
-<Form.Group className="mb-3" controlId="formGridYear">
- <Form.Label>Year</Form.Label>
- <Form.Control placeholder="Enter the year of production of your item" name = "year" defaultValue={furniture.year} onChange={changeHandler} required />
- <Alert variant="danger" show={errors.year}>{errors.year}</Alert>
+<Form.Group className="mb-3" controlId="formGridphoneNumber">
+ <Form.Label>Phone Number</Form.Label>
+ <Form.Control placeholder="Enter your phone number" name = "phoneNumber" defaultValue={furniture.phoneNumber} onChange={changeHandler} required />
+ <Alert variant="danger" show={errors.phoneNumber}>{errors.phoneNumber}</Alert>
 
 </Form.Group>
 <Form.Group className="mb-3" controlId="formGridColor">

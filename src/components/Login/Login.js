@@ -4,7 +4,9 @@ import { useNavigate } from "react-router";
 import { AuthContext } from "../../contexts/AuthContext";
 import * as authService from "../../services/authService"
 import { validateEmail,validatePassword } from "../../helpers/FormValidationHelper";
+import { useNotificationContext,types } from "../../contexts/NotificationContext";
 const Login = () =>{
+  const { addNotification } = useNotificationContext();
 
     const {login} = useContext(AuthContext)
     const navigate = useNavigate();
@@ -30,7 +32,7 @@ const Login = () =>{
 
           authService.login(email,password)
           .then((authData)=>{
-             
+            addNotification('Successfull login!', types.success)
               login(authData)
               navigate('/catalog')
           })

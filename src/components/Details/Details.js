@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 
 import * as furnitureService from '../../services/furnitureService';
-import * as likeService from '../../services/likeService';
+import * as reactService from '../../services/reactService';
 import { useAuthContext } from '../../contexts/AuthContext';
 import { useNotificationContext, types } from '../../contexts/NotificationContext';
 import useFurnitureState from '../../hooks/useFurnitureState';
@@ -19,29 +19,31 @@ const Details = () => {
     const [showDeleteDialog, setShowDeleteDialog] = useState(false);
 
     useEffect(() => {
-        likeService.getFurnitureLikes(furnitureId)
+        reactService.getFurnitureLikes(furnitureId)
             .then(likes => {
                 setFurniture(state => ({...state, likes}))
             })
-    }, []);  
+    }, [furnitureId,setFurniture]);  
      useEffect(() => {
-        likeService.getFurnitureLove(furnitureId)
+        reactService.getFurnitureLove(furnitureId)
             .then(love => {
                 setFurniture(state => ({...state, love}))
             })
-    }, []);
+    }, [furnitureId,setFurniture]);
     useEffect(() => {
-        likeService.getFurnitureReserve(furnitureId)
+        reactService.getFurnitureReserve(furnitureId)
             .then(reserve => {
                 setFurniture(state => ({...state, reserve}))
             })
-    }, []);
+    }, [furnitureId,setFurniture]);
 
     const deleteHandler = (e) => {
         e.preventDefault();
 
         furnitureService.destroy(furnitureId, user.accessToken)
             .then(() => {
+                addNotification('You succesfully deleted your listing!',types.success)
+
                 navigate('/catalog');
             })
             .finally(() => {
@@ -58,7 +60,7 @@ const Details = () => {
     const ownerButtons = (
         <>
             <Link className="button" to={`/edit/${furniture._id}`}>Edit</Link>
-            <a className="button" href="#" onClick={deleteClickHandler}>Delete</a>
+            <a className="button" href="/#" onClick={deleteClickHandler}>Delete</a>
         </>
     );
 
@@ -72,7 +74,7 @@ const Details = () => {
             return;
         }
 
-        likeService.like(user._id, furnitureId)
+        reactService.like(user._id, furnitureId)
             .then(() => {
                 setFurniture(state => ({...state, likes: [...state.likes, user._id]}));
 
@@ -89,7 +91,7 @@ const Details = () => {
             return;
         }
         
-        likeService.love(user._id, furnitureId)
+        reactService.love(user._id, furnitureId)
         .then(() => {
             
 
@@ -109,7 +111,7 @@ const Details = () => {
             return;
         } 
         
-        likeService.reserve(user._id, furnitureId)
+        reactService.reserve(user._id, furnitureId)
         .then(() => {
             
 
@@ -148,7 +150,7 @@ const Details = () => {
             } />
           
                   <Card.Title>Price : {furniture.price}</Card.Title>
-                  <Card.Text>  Year : {furniture.year} </Card.Text>
+                  <Card.Text>  Phone Number : {furniture.phoneNumber} </Card.Text>
                  <Card.Text> Color : {furniture.color}</Card.Text>
                  
         

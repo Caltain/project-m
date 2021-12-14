@@ -18,13 +18,15 @@ export const request = async (method, url, data) => {
 };
 
 async function responseHandler(res) {
-    let jsonData = await res.json();
-
-    if (res.ok) {
-        return Object.values(jsonData);
-    } else {
-        throw jsonData;
+    try {
+        let jsonData = await res.json();
+        if (res.ok) {
+            return Object.values(jsonData);
+        } 
+    } catch (error) {
+        console.log(error);
     }
+    
 };
 
 function getToken() {
@@ -32,7 +34,8 @@ function getToken() {
         let userItem = localStorage.getItem('user');
 
         if (!userItem) {
-            throw {message: 'You must be authenticated'};
+            console.log('You must be authenticated')
+            return
         }
 
         let user = JSON.parse(userItem);

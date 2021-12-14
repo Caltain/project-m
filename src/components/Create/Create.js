@@ -5,16 +5,17 @@ import { useState } from 'react';
 import * as furnitureService from '../../services/furnitureService';
 import { useAuthContext } from '../../contexts/AuthContext';
 import { validateString,validateNumber,validateImageUrl } from "../../helpers/FormValidationHelper";
+import { useNotificationContext,types } from "../../contexts/NotificationContext";
 
 
 const Create = () => {
-
+  const { addNotification } = useNotificationContext();
   const navigate = useNavigate();
   const { user } = useAuthContext();
   const [errors, setErrors] = useState({
     name: false, 
     price : false, 
-    year : false, 
+    phoneNumber : false, 
     color : false, 
     imageUrl:false, 
     description:false
@@ -27,7 +28,7 @@ const Create = () => {
 
     let name = formData.get('name');
     let price = formData.get('price');
-    let year = formData.get('year');
+    let phoneNumber = formData.get('phoneNumber');
     let color = formData.get('color');
     let imageUrl = formData.get('imageUrl');
     let description = formData.get('description');
@@ -36,7 +37,7 @@ const Create = () => {
         if(
             errors.name== false 
           &&errors.price== false
-          &&errors.year== false
+          &&errors.phoneNumber== false
           &&errors.color== false
           &&errors.imageUrl== false
           &&errors.description== false 
@@ -44,12 +45,13 @@ const Create = () => {
           furnitureService.create({
           name,
           price,
-          year,
+          phoneNumber,
           color,
           imageUrl,
           description     
       },user.accessToken)
           .then(result => {
+            addNotification('Successfuly created a furniture listing!', types.success)
               navigate('/catalog');
           })
 
@@ -77,11 +79,11 @@ const changeHandler = (e) => {
     } else {
       setErrors(state => ({...state, price: 'This field should contain only numbers'}))           
     }
-  }else if(field==="year"){
+  }else if(field==="phoneNumber"){
     if (validateNumber(currentValue)) {
-      setErrors(state => ({...state, year: false}))
+      setErrors(state => ({...state, phoneNumber: false}))
     } else {
-      setErrors(state => ({...state, year: 'This field should contain only numbers'}))
+      setErrors(state => ({...state, phoneNumber: 'This field should contain only numbers'}))
     }
   }else if(field==="color"){
     if (validateString(currentValue)) {
@@ -119,15 +121,15 @@ const changeHandler = (e) => {
 
     </Form.Group>
   <Form.Group className="mb-3" controlId="formGridPrice">
-    <Form.Label>Price</Form.Label>
+    <Form.Label>Price </Form.Label>
     <Form.Control placeholder="Enter the price in euros of your item? " name="price" onChange={changeHandler} required />
     <Alert variant="danger" show={errors.price}>{errors.price}</Alert>
 
   </Form.Group>
-  <Form.Group className="mb-3" controlId="formGridYear">
-    <Form.Label>Year</Form.Label>
-    <Form.Control placeholder="Enter the year of production of your item" name = "year" onChange={changeHandler} required />
-    <Alert variant="danger" show={errors.year}>{errors.year}</Alert>
+  <Form.Group className="mb-3" controlId="formGridphoneNumber">
+    <Form.Label>Phone Number</Form.Label>
+    <Form.Control placeholder="Enter your phone number" name = "phoneNumber" onChange={changeHandler} required />
+    <Alert variant="danger" show={errors.phoneNumber}>{errors.phoneNumber}</Alert>
 
   </Form.Group>
   <Form.Group className="mb-3" controlId="formGridColor">

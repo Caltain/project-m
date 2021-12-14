@@ -3,30 +3,24 @@ import GoogleMapReact from 'google-map-react';
 import { Carousel, Form, Button } from "react-bootstrap";
 import * as commentService from '../../services/commentService';
 
-
-
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 const user = JSON.parse(localStorage.getItem("user"))
-
-
 
 class SimpleMap extends Component {
   
   constructor(props) {
     super(props);
-    this.onCreateComment=this.onCreateComment.bind(this)
-    this.state = {
-      hasBeenClicked: false,
-    };
+    this.onCreateCommentHandler=this.onCreateCommentHandler.bind(this)
+
   }
   static defaultProps = {
     center: {
       lat: 42.654015,
       lng: 23.399013
     },
-    zoom: 16
+    zoom: 12
   };
-  onCreateComment(e){
+onCreateCommentHandler(e){
 e.preventDefault();
 
 
@@ -41,7 +35,7 @@ let comment = formData.get('comment')
    .then(res=>{
 
     form.reset()
-    this.state.hasBeenClicked = true;
+    
    })
  
 
@@ -71,6 +65,8 @@ let comment = formData.get('comment')
             text="My Home"
             />
         </GoogleMapReact>
+        <h4>This is where you can find me</h4>
+
       </div>
 
 
@@ -121,7 +117,7 @@ let comment = formData.get('comment')
           
       </div>
       <div>
-      <Form id="form" onSubmit={this.onCreateComment} method="POST">  
+      <Form id="form" onSubmit={this.onCreateCommentHandler} method="POST">  
   <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
   <Form.Label>You can give feedback to the admin of this site if you like.</Form.Label>
 

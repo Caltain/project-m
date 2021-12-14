@@ -23,7 +23,6 @@ const FurnitureList = () =>{
                 <ul className="ulFurniture">
                     <h1>Furniture listings</h1>
                     <CardGroup>
-
                     {furniture.map(x=><FurnitureCard key={x._id} furniturePiece={x} />)}
                     </CardGroup>
                 </ul>

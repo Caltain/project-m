@@ -1,4 +1,4 @@
-import { useState, useEffect,useMemo } from 'react';
+import { useState, useEffect } from 'react';
 
 import * as furnitureService from '../services/furnitureService';
 
@@ -8,7 +8,7 @@ const useFurnitureState = (furnitureId) => {
     useEffect(() => {
         furnitureService.getOne(furnitureId)
             .then(furnitureResult => {
-                console.log(furnitureResult);
+               
                 setFurniture(furnitureResult);
             })
             

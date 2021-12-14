@@ -5,7 +5,7 @@ import {useNavigate } from 'react-router-dom';
 
 import * as furnitureService from '../../../services/furnitureService';
 import { useAuthContext } from "../../../contexts/AuthContext";
-import { useNotificationContext } from "../../../contexts/NotificationContext";
+import { useNotificationContext,types } from "../../../contexts/NotificationContext";
 import ConfirmDialog from '../../Common/ConfirmDialog';
 
 
@@ -28,12 +28,14 @@ useEffect(() => {
         })
        
         
-}, []);
+}, [furniturePiece.furnitureId]);
 const cancelHandler  = (e) => {
     e.preventDefault();
     furnitureService.cancel(id, user.accessToken)
     .then(() => {
         navigate('/catalog');
+        addNotification('SuccessfulL cancelation!', types.success)
+
     })
     .finally(() => {
         setShowCancelDialog(false);
@@ -52,15 +54,21 @@ const cancelClickHandler = (e) => {
        
         <ConfirmDialog show={showCancelDialog} onClose={() => setShowCancelDialog(false)} onSave={cancelHandler} />
         <li className="reservertionCard"> 
-           <Card bg="dark" text="white" style={{ width: '18rem', height:'25rem', margin:"10px"}}>
-           <Card.Img style={{ width: '18rem', height:'12rem'}} variant="top" src={furniture.imageUrl} />
+           <Card bg="dark" text="white" style={{ width: '18rem', height:'30rem', margin:"10px"}}>
+           <Card.Img style={{ width: '18rem', height:'16rem'}} variant="top" src={furniture.imageUrl} />
            <Card.Body>
-                  <Card.Title>{furniture.name}</Card.Title>
+                  <Card.Title>Name:  {furniture.name}</Card.Title>
                   <Card.Text>
-                     {furniture.price} €
-                     </Card.Text>
+                   Price: {furniture.price} €
+                 </Card.Text>
+                 <Card.Text>
+                  PhoneNumber:  {furniture.phoneNumber} 
+                 </Card.Text>
+                 <Card.Text>
+                  Color:   {furniture.color} 
+                 </Card.Text>
                     <Card.Text>
-                     {furniture.description}
+                   Description:  {furniture.description}
                      </Card.Text>
                      <Link className="button" to={`/details/${furniture._id}`}>Details</Link>
                      <Link className="button" style={{marginLeft:"50px"}} to="#" onClick={cancelClickHandler}>Cancel</Link>
