@@ -23,6 +23,10 @@ const Header = () => {
     let userNavigation = (
         <>
             <Nav.Link>Wellcome {user.email}!</Nav.Link>
+            {user.email === "peter@abv.bg"
+            ?<Nav.Link to="/comments" as={Link}>Comments</Nav.Link>
+             : ""
+             }
             <Nav.Link to="/catalog" as={Link}>Catalog</Nav.Link>
             <Nav.Link to="/create" as={Link}>Create</Nav.Link>
             <Nav.Link to="/my-reservations" as={Link}> My Reservations</Nav.Link>

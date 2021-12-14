@@ -29,20 +29,6 @@ export const create = async (furnitureData, token) => {
     return result;
 };
 
-export const comment = async (commentData, token) => {
-    let response = await fetch(`${baseUrl}/comments`, {
-        method: 'POST',
-        headers: {
-            'content-type': 'application/json',
-            'X-Authorization': token,
-        },
-        body: JSON.stringify({...commentData})
-    });
-
-    let result = await response.json();
-
-    return result;
-};
 
 
 export const update = (furnitureId, furnitureData) => request.put(`${baseUrl}/furniture/${furnitureId}`, furnitureData);

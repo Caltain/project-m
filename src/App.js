@@ -18,6 +18,8 @@ import GuardedRoute from './components/Common/GuardedRoute';
 import Details from './components/Details/Details';
 import Edit from './components/Edit/Edit';
 import Reservations from './components/Reservations/Reservations';
+import Comments from './components/Comments';
+import GuardedRouteForComments from './components/Common/GuardedRouteForComments/GuardedRouteForComments';
 
 
 function App() {
@@ -45,7 +47,11 @@ function App() {
                   <Route path ="/about" element={<About/>} />
                   <Route path="/create" element={<Create />} />
                   <Route path="/edit/:furtnitureId" element={<Edit />} />
-               </Route>
+         </Route>
+         <Route element={<GuardedRouteForComments />}>
+                  <Route path="/comments" element={<Comments />} />
+                 
+         </Route>
           </Routes>
 
       </main>

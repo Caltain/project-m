@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
 import { Carousel, Form, Button } from "react-bootstrap";
-import * as furnitureService from '../../services/furnitureService';
+import * as commentService from '../../services/commentService';
 
 
 
@@ -36,12 +36,12 @@ let email = formData.get('email');
 let comment = formData.get('comment')
 
  try {
-   console.log(user.accessToken);
-   furnitureService.comment({email,comment},user.accessToken)
+   
+   commentService.comment({email,comment},user.accessToken)
    .then(res=>{
 
     form.reset()
-    
+    this.state.hasBeenClicked = true;
    })
  
 
@@ -126,7 +126,7 @@ let comment = formData.get('comment')
   <Form.Label>You can give feedback to the admin of this site if you like.</Form.Label>
 
     <Form.Label>Your email address</Form.Label>
-    <Form.Control type="email" name='email' placeholder="name@example.com" />
+    <Form.Control type="email" name='email'  placeholder="name@example.com" />
   </Form.Group>
   <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
     <Form.Label>Comment</Form.Label>
