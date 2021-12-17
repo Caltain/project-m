@@ -38,7 +38,7 @@ const Register = () =>{
           authService.register(email, password)   
             .then(authData => {
                 login(authData);
-                addNotification('Successfull registration!', types.success)
+                addNotification('Successfull registration!', types.info)
                 
                 navigate('/');
             })

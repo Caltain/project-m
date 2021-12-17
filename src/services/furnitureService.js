@@ -25,7 +25,7 @@ export const create = async (furnitureData, token) => {
     });
 
     let result = await response.json();
-
+    console.log(result);
     return result;
 };
 

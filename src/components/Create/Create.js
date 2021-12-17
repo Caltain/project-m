@@ -51,7 +51,7 @@ const Create = () => {
           description     
       },user.accessToken)
           .then(result => {
-            addNotification('Successfuly created a furniture listing!', types.success)
+            addNotification('Successfuly created a furniture listing!', types.info)
               navigate('/catalog');
           })
 

@@ -32,7 +32,7 @@ const Login = () =>{
 
           authService.login(email,password)
           .then((authData)=>{
-            addNotification('Successfull login!', types.success)
+            addNotification('Successfull login!', types.info)
               login(authData)
               navigate('/catalog')
           })

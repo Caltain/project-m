@@ -18,15 +18,13 @@ export const request = async (method, url, data) => {
 };
 
 async function responseHandler(res) {
-    try {
-        let jsonData = await res.json();
-        if (res.ok) {
-            return Object.values(jsonData);
-        } 
-    } catch (error) {
-        console.log(error);
+    let jsonData = await res.json();
+
+    if (res.ok) {
+        return Object.values(jsonData);
+    } else {
+        throw jsonData;
     }
-    
 };
 
 function getToken() {

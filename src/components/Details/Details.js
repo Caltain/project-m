@@ -17,10 +17,12 @@ const Details = () => {
     const { furnitureId } = useParams();
     const [furniture, setFurniture] = useFurnitureState(furnitureId);
     const [showDeleteDialog, setShowDeleteDialog] = useState(false);
-
+console.log(user);
     useEffect(() => {
+     
         reactService.getFurnitureLikes(furnitureId)
             .then(likes => {
+                
                 setFurniture(state => ({...state, likes}))
             })
     }, [furnitureId,setFurniture]);  
@@ -36,13 +38,13 @@ const Details = () => {
                 setFurniture(state => ({...state, reserve}))
             })
     }, [furnitureId,setFurniture]);
-
+   
     const deleteHandler = (e) => {
         e.preventDefault();
 
         furnitureService.destroy(furnitureId, user.accessToken)
             .then(() => {
-                addNotification('You succesfully deleted your listing!',types.success)
+                addNotification('You succesfully deleted your listing!',types.info)
 
                 navigate('/catalog');
             })
@@ -68,8 +70,8 @@ const Details = () => {
         if (user._id === furniture._ownerId) {
             return;
         }
-       
-        if (furniture.likes.includes(user._id)) {
+       console.log(furniture.likes);
+        if (furniture?.likes.includes(user._id)) {
             addNotification('You cannot like again')
             return;
         }
@@ -78,7 +80,7 @@ const Details = () => {
             .then(() => {
                 setFurniture(state => ({...state, likes: [...state.likes, user._id]}));
 
-                addNotification('Successfuly liked a furniture :)', types.success);
+                addNotification('Successfuly liked a furniture :)', types.info);
             });
     };
 
@@ -98,7 +100,7 @@ const Details = () => {
             setFurniture(state => ({...state, love: [...state.love, user._id]}));
             
 
-                addNotification('Successfuly loved a furniture :)', types.success);
+                addNotification('Successfuly loved a furniture :)', types.info);
             });
     };
     const reserveButtonClick = () => {
@@ -119,20 +121,28 @@ const Details = () => {
         
            
 
-            addNotification('Successfuly reserved a furniture!', types.success);
+            addNotification('Successfuly reserved a furniture!', types.info);
         });
+       
+
     };
-  
     const userButtons = (
         <>
          <Button onClick={likeButtonClick} disabled={furniture.likes?.includes(user._id)}>Like</Button>
-         <span style={{}}> <Button variant="info">Likes 👍: {furniture.likes?.length || 0}</Button>{" "}</span>
          <span > <Button onClick={reserveButtonClick} variant="success" disabled={furniture.reserve?.includes(user._id)}>Reserve</Button></span>
          <Button style={{marginLeft:'5px'}} variant='danger' onClick={loveButtonClick} disabled={furniture.love?.includes(user._id)}>Love</Button>
-         <span style={{}}> <Button variant="danger">Loved ♥: {furniture.love?.length || 0}</Button>{" "}</span>
+        
         </>
     );
     
+    const guestButtons = (
+        <>
+        <span > <Button variant="info">Liked 👍: {furniture.likes?.length || 0}</Button>{" "}</span>
+        <span > <Button variant="danger">Loved ♥: {furniture.love?.length || 0}</Button>{" "}</span>
+ 
+        </>
+
+    )
     return (
         <>
             <ConfirmDialog show={showDeleteDialog} onClose={() => setShowDeleteDialog(false)} onSave={deleteHandler} />
@@ -163,7 +173,7 @@ const Details = () => {
                             : userButtons 
                         )}
              
-
+                        {guestButtons}   
 
              
              

@@ -13,7 +13,7 @@ const Logout = () => {
     useEffect(() => {
         authService.logout(user.accessToken)
             .then(() => {
-                addNotification('Successfull logout!', types.success)
+                addNotification('Successfull logout!', types.info)
                 logout();
                 navigate('/');
             })

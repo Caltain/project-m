@@ -34,7 +34,7 @@ const cancelHandler  = (e) => {
     furnitureService.cancel(id, user.accessToken)
     .then(() => {
         navigate('/catalog');
-        addNotification('SuccessfulL cancelation!', types.success)
+        addNotification('SuccessfulL cancelation!', types.info)
 
     })
     .finally(() => {

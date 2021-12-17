@@ -38,7 +38,7 @@ const Edit = () => {
 
              furnitureService.update(furniture._id, furnitureData)
              .then(result => {
-                  addNotification('Successfuly edited your furniture listing!', types.success)
+                  addNotification('Successfuly edited your furniture listing!', types.info)
                   navigate(`/details/${furtnitureId}`);
               })
     
