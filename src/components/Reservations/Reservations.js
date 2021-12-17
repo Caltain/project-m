@@ -1,11 +1,8 @@
 import { CardGroup} from 'react-bootstrap';
-
-
 import { useState, useEffect } from 'react';
 
 import * as furnitureService from '../../services/furnitureService';
 import { useAuthContext } from '../../contexts/AuthContext';
-
 import FurnitureReservationCard from './FurnitureReservationCard';
 
 
@@ -16,7 +13,7 @@ const Reservations = () => {
     const { user } = useAuthContext();
    
     
-
+//Hook for setting state
     useEffect(() => {
         furnitureService.getReservations(user._id)
             .then(furnitureResult => {

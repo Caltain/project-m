@@ -24,6 +24,13 @@ export const validateString = (string) => {
         return true
     }
 }
+export const validateLongString = (string) => {
+    if (string.length < 3 || string.length > 50) {
+        return false
+    }else{
+        return true
+    }
+}
 
 export const validateNumber = (number) =>{
     if (Number(number)) {

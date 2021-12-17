@@ -4,15 +4,11 @@ const baseUrl = 'http://localhost:3030/data';
 
 export const getAll = () => request.get(`${baseUrl}/furniture`);
 
-
-
 export const getReservations = (reserverId) => {
     let query = encodeURIComponent(`userId="${reserverId}"`);
     return   request.get(`${baseUrl}/reserve?where=${query}`)
 
 };
-
-
 
 export const create = async (furnitureData, token) => {
     let response = await fetch(`${baseUrl}/furniture`, {
@@ -29,8 +25,6 @@ export const create = async (furnitureData, token) => {
     return result;
 };
 
-
-
 export const update = (furnitureId, furnitureData) => request.put(`${baseUrl}/furniture/${furnitureId}`, furnitureData);
 
 export const getOne = (furnitureId) => {
@@ -40,7 +34,6 @@ export const getOne = (furnitureId) => {
                  res.json())
 };
 
-
 export const destroy = (furnitureId, token) => {
     return fetch(`${baseUrl}/furniture/${furnitureId}`, {
         method: 'DELETE',
@@ -49,6 +42,7 @@ export const destroy = (furnitureId, token) => {
         }
     }).then(res => res.json());
 };
+
 export const cancel = (furnitureId, token) => {
     return fetch(`${baseUrl}/reserve/${furnitureId}`, {
         method: 'DELETE',
@@ -57,7 +51,6 @@ export const cancel = (furnitureId, token) => {
         }
     }).then(res => res.json());
 };
-
 
 export const like = (furnitureId, furniture, token) => {
     return fetch(`${baseUrl}/furniture/${furnitureId}`, {

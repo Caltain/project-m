@@ -1,3 +1,4 @@
+import { Button,Card } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 
@@ -6,9 +7,8 @@ import * as reactService from '../../services/reactService';
 import { useAuthContext } from '../../contexts/AuthContext';
 import { useNotificationContext, types } from '../../contexts/NotificationContext';
 import useFurnitureState from '../../hooks/useFurnitureState';
-
-import { Button,Card } from 'react-bootstrap';
 import ConfirmDialog from '../Common/ConfirmDialog';
+
 
 const Details = () => {
     const navigate = useNavigate();
@@ -17,29 +17,34 @@ const Details = () => {
     const { furnitureId } = useParams();
     const [furniture, setFurniture] = useFurnitureState(furnitureId);
     const [showDeleteDialog, setShowDeleteDialog] = useState(false);
-console.log(user);
+
+//Hook to get the number of likes
     useEffect(() => {
-     
         reactService.getFurnitureLikes(furnitureId)
             .then(likes => {
                 
                 setFurniture(state => ({...state, likes}))
             })
     }, [furnitureId,setFurniture]);  
+
+//Hook to get the number of loves
      useEffect(() => {
         reactService.getFurnitureLove(furnitureId)
             .then(love => {
                 setFurniture(state => ({...state, love}))
             })
     }, [furnitureId,setFurniture]);
+
+//Hook to get if the item is reserved
     useEffect(() => {
         reactService.getFurnitureReserve(furnitureId)
             .then(reserve => {
                 setFurniture(state => ({...state, reserve}))
             })
     }, [furnitureId,setFurniture]);
-   
-    const deleteHandler = (e) => {
+
+//Handles the delete request
+ const deleteHandler = (e) => {
         e.preventDefault();
 
         furnitureService.destroy(furnitureId, user.accessToken)
@@ -53,20 +58,21 @@ console.log(user);
             });
     };
 
-    const deleteClickHandler = (e) => {
+//Handles the modal 
+ const deleteClickHandler = (e) => {
         e.preventDefault();
        
         setShowDeleteDialog(true);
     }
 
-    const ownerButtons = (
+ const ownerButtons = (
         <>
             <Link className="button" to={`/edit/${furniture._id}`}>Edit</Link>
             <a className="button" href="/#" onClick={deleteClickHandler}>Delete</a>
         </>
     );
-
-    const likeButtonClick = () => {
+//Handles the like button interaction
+const likeButtonClick = () => {
         if (user._id === furniture._ownerId) {
             return;
         }
@@ -75,7 +81,6 @@ console.log(user);
             addNotification('You cannot like again')
             return;
         }
-
         reactService.like(user._id, furnitureId)
             .then(() => {
                 setFurniture(state => ({...state, likes: [...state.likes, user._id]}));
@@ -84,7 +89,8 @@ console.log(user);
             });
     };
 
-    const loveButtonClick = () => {
+//Handles the love button interaction
+const loveButtonClick = () => {
         if (user._id === furniture._ownerId) {
             return;
         }
@@ -96,14 +102,14 @@ console.log(user);
         reactService.love(user._id, furnitureId)
         .then(() => {
             
-
             setFurniture(state => ({...state, love: [...state.love, user._id]}));
             
-
                 addNotification('Successfuly loved a furniture :)', types.info);
             });
     };
-    const reserveButtonClick = () => {
+
+//Handles the reserve button interaction
+ const reserveButtonClick = () => {
         if (user._id === furniture._ownerId) {
             return;
         }
@@ -115,12 +121,9 @@ console.log(user);
         
         reactService.reserve(user._id, furnitureId)
         .then(() => {
-            
 
             setFurniture(state => ({...state, reserve: [...state.reserve, user._id]}));
-        
-           
-
+   
             addNotification('Successfuly reserved a furniture!', types.info);
         });
        
@@ -162,8 +165,7 @@ console.log(user);
                   <Card.Title>Price : {furniture.price}</Card.Title>
                   <Card.Text>  Phone Number : {furniture.phoneNumber} </Card.Text>
                  <Card.Text> Color : {furniture.color}</Card.Text>
-                 
-        
+                       
              <Card.Text>
                  Description : {furniture.description}
             </Card.Text>
@@ -175,14 +177,9 @@ console.log(user);
              
                         {guestButtons}   
 
-             
-             
              </Card.Body>
             
-             </Card>
-            
-          
-                
+             </Card>         
            
         </>
     );

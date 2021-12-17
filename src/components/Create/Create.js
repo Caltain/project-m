@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import * as furnitureService from '../../services/furnitureService';
 import { useAuthContext } from '../../contexts/AuthContext';
-import { validateString,validateNumber,validateImageUrl } from "../../helpers/FormValidationHelper";
+import { validateString,validateLongString,validateNumber,validateImageUrl } from "../../helpers/FormValidationHelper";
 import { useNotificationContext,types } from "../../contexts/NotificationContext";
 
 
@@ -32,6 +32,8 @@ const Create = () => {
     let color = formData.get('color');
     let imageUrl = formData.get('imageUrl');
     let description = formData.get('description');
+
+//Handles the creattion of the furniture listing
 
     try {
         if(
@@ -63,7 +65,7 @@ const Create = () => {
       }
     
 }
-
+//Handles the form validation and updating state
 const changeHandler = (e) => {
   let currentValue = e.target.value;
   let field = e.target.name
@@ -100,11 +102,11 @@ const changeHandler = (e) => {
       setErrors(state => ({...state, imageUrl: 'This field should be a valid URL'}))   
     }
   }else if(field==="description"){
-    if (validateString(currentValue)) {
+    if (validateLongString(currentValue)) {
       
       setErrors(state => ({...state, description: false}))
     } else {
-      setErrors(state => ({...state, description: 'This field should have between 3 and 20 characters!'}))
+      setErrors(state => ({...state, description: 'This field should have between 3 and 50 characters!'}))
     }
 }
 }

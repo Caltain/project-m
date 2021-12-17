@@ -1,9 +1,10 @@
+import { Alert, Form, Row,Button } from 'react-bootstrap';
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+
 import * as furnitureService from '../../services/furnitureService';
 import useFurnitureState from '../../hooks/useFurnitureState';
-import { Alert, Form, Row,Button } from 'react-bootstrap';
-import { validateString,validateNumber,validateImageUrl } from "../../helpers/FormValidationHelper";
+import { validateString,validateLongString,validateNumber,validateImageUrl } from "../../helpers/FormValidationHelper";
 import { useNotificationContext,types } from '../../contexts/NotificationContext';
 
 
@@ -19,8 +20,8 @@ const Edit = () => {
         imageUrl:false, 
         description:false})
     const [furniture] = useFurnitureState(furtnitureId);
-
     
+//Handles the update of the furniture listing
     const furnitureEditSubmitHandler = (e) => {
         e.preventDefault();
         try {
@@ -51,7 +52,7 @@ const Edit = () => {
         
 
     }
-
+//Handles the form validation and updating state
     const changeHandler = (e) => {
         let currentValue = e.target.value;
         let field = e.target.name
@@ -88,11 +89,11 @@ const Edit = () => {
             setErrors(state => ({...state, imageUrl: 'This field should be a valid URL'}))   
           }
         }else if(field==="description"){
-          if (validateString(currentValue)) {
+          if (validateLongString(currentValue)) {
             
             setErrors(state => ({...state, description: false}))
           } else {
-            setErrors(state => ({...state, description: 'This field should have between 3 and 20 characters!'}))
+            setErrors(state => ({...state, description: 'This field should have between 3 and 50 characters!'}))
           }
       }
       }

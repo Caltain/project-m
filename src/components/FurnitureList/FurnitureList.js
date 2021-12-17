@@ -1,7 +1,8 @@
+import { CardGroup,Form,Row,Col} from "react-bootstrap";
 import { useEffect,useState } from "react";
+
 import FurnitureCard from "./FurnitureCard";
 import * as furnitureService from '../../services/furnitureService.js'
-import { CardGroup,Form,Row,Col} from "react-bootstrap";
 
 
 const FurnitureList = () =>{

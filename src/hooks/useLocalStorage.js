@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-
+//Providing access to the local store items
 const useLocalStorage = (key,initialValue) =>{
     const [state,setState] = useState(()=>{
         try {

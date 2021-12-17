@@ -19,7 +19,8 @@ import Details from './components/Details/Details';
 import Edit from './components/Edit/Edit';
 import Reservations from './components/Reservations/Reservations';
 import Comments from './components/Comments';
-import GuardedRouteForComments from './components/Common/GuardedRouteForComments/GuardedRouteForComments';
+import GuardedRouteForComments from './components/Common/GuardedRouteForComments';
+
 
 
 function App() {

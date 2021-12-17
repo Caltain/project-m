@@ -11,7 +11,7 @@ export const types = {
 };
 
 const initialNotificationState = { show: false, message: '', type: types.error };
-
+//Hook for notifications
 export const NotificationProvider = ({
     children
 }) => {

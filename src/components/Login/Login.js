@@ -1,10 +1,12 @@
-import { useContext, useState } from "react";
 import { Form, Button, Alert, Row } from "react-bootstrap";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router";
+
 import { AuthContext } from "../../contexts/AuthContext";
 import * as authService from "../../services/authService"
 import { validateEmail,validatePassword } from "../../helpers/FormValidationHelper";
 import { useNotificationContext,types } from "../../contexts/NotificationContext";
+
 const Login = () =>{
   const { addNotification } = useNotificationContext();
 
@@ -17,7 +19,7 @@ const Login = () =>{
      
     })
   
-
+//Handles the log in process
     const onLoginHandler = (e) =>{
         e.preventDefault();
        
@@ -47,6 +49,7 @@ const Login = () =>{
         }
 
     }
+ //Handles the validation of the form and updating state   
     const changeHandler = (e) => {
       let currentValue = e.target.value;
       let field = e.target.name
